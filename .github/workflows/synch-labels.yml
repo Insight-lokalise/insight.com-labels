@@ -17,7 +17,7 @@ jobs:
           path: ecom-services
           ref: lokalise
           clean: true
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.TF_GITHUB_TOKEN }}
       - name: Checkout iw-prototype
         uses: actions/checkout@v2
         with:
@@ -25,13 +25,13 @@ jobs:
           path: iw-prototype
           ref: lokalise
           clean: true
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.TF_GITHUB_TOKEN }}
       - name: Synchronize ecom-services labels
         working-directory: ecom-services
         run: |
           rm -Rf web/insightweb/labels
           cp -R ../lokalise/insightweb/labels/ web/insightweb/labels
-          git remote set-url origin https://${{ secrets.TF_GITHUB_TOKEN }}@github.com/Insight-IT-Web/ecom-services.git
+          git remote set-url origin https://${{ secrets.TF_TF_GITHUB_TOKEN }}@github.com/Insight-IT-Web/ecom-services.git
           git status
           git add .
           git status
@@ -43,7 +43,7 @@ jobs:
        # run: |
         #  rm -Rf packages/app-header/labels
          # cp -R ../lokalise/app-header/labels/ packages/app-header/labels
-          #git remote set-url origin https://${{ secrets.TF_GITHUB_TOKEN }}@github.com/Insight-IT-Web/iw-prototype.git
+          #git remote set-url origin https://${{ secrets.TF_TF_GITHUB_TOKEN }}@github.com/Insight-IT-Web/iw-prototype.git
          # git status
          # git add .
          # git status
