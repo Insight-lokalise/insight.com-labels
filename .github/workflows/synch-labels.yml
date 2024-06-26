@@ -1,0 +1,52 @@
+name: Synchronize Insight.com Labels
+on:
+  push:
+    branches:
+      - main
+      - test-lokalise
+
+jobs:
+  Synchronize-labels:
+    name: Synchronize
+    runs-on: [ self-hosted, non-scalable ]
+    steps:
+      - name: Checkout ecom-services
+        uses: actions/checkout@v2
+        with:
+          repository: Insight-IT-Web/ecom-services
+          path: ecom-services
+          ref: lokalise
+          clean: true
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Checkout iw-prototype
+        uses: actions/checkout@v2
+        with:
+          repository: Insight-IT-Web/iw-prototype
+          path: iw-prototype
+          ref: lokalise
+          clean: true
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Synchronize ecom-services labels
+        working-directory: ecom-services
+        run: |
+          rm -Rf web/insightweb/labels
+          cp -R ../lokalise/insightweb/labels/ web/insightweb/labels
+          git remote set-url origin https://${{ secrets.TF_GITHUB_TOKEN }}@github.com/Insight-IT-Web/ecom-services.git
+          git status
+          git add .
+          git status
+          git commit -m "PRT-1234 synchronizing insight.com labels"
+          git push
+        shell: bash
+     # - name: Synchronize iw-prototype labels
+      #  working-directory: iw-prototype
+       # run: |
+        #  rm -Rf packages/app-header/labels
+         # cp -R ../lokalise/app-header/labels/ packages/app-header/labels
+          #git remote set-url origin https://${{ secrets.TF_GITHUB_TOKEN }}@github.com/Insight-IT-Web/iw-prototype.git
+         # git status
+         # git add .
+         # git status
+         # git commit -m "PRT-1234 synchronizing insight.com labels"
+         # git push
+        #shell: bash
