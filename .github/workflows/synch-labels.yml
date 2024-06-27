@@ -5,6 +5,7 @@ on:
       - main
       - test-lokalise
 
+
 jobs:
   Synchronize-labels:
     name: Synchronize
