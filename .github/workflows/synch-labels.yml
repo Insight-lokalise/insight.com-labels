@@ -38,8 +38,6 @@ jobs:
           pwd
           cp -R ../lokalise/insightweb/labels/ web/insightweb/
           git remote set-url origin https://${{ secrets.TF_GITHUB_TOKEN }}@github.com/Insight-IT-Web/ecom-services.git
-          git config --global user.email "pjetly@insight.com"
-          git config --global user.name "Pooja jetly"
           git status
           git add .
           git status
