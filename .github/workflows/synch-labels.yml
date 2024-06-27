@@ -36,7 +36,7 @@ jobs:
           rm -Rf ecom-services/web/insightweb/labels
           ls -ltr
           pwd
-          cp -R ../lokalise/insightweb/labels/ ecom-services/web/insightweb/labels
+          cp -R ../lokalise/insightweb/labels/ web/insightweb/labels
           git remote set-url origin https://${{ secrets.TF_TF_GITHUB_TOKEN }}@github.com/Insight-IT-Web/ecom-services.git
           git status
           git add .
